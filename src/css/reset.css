@@ -21,10 +21,12 @@ ul {
 a {
   color: currentColor;
   text-decoration: none;
+  line-height: 0;
 }
 
 button {
   cursor: pointer;
+  padding: 0;
 }
 
 img {
