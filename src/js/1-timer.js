@@ -24,8 +24,10 @@ const options = {
         position: 'topRight',
       });
       startButton.classList.remove('data-button-active');
+      startButton.disabled = true;
     } else {
       startButton.classList.add('data-button-active');
+      startButton.disabled = false;
     }
   },
 };

@@ -26,6 +26,7 @@
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0.04em;
+  pointer-events: none;
 
   color: #989898;
   background-color: #cfcfcf;
@@ -37,6 +38,7 @@
 .data-button-active {
   background-color: #4e75ff;
   color: #fff;
+  pointer-events: auto;
 }
 
 .field {
