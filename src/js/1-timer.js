@@ -22,6 +22,8 @@ const options = {
         messageColor: '#fff',
         backgroundColor: '#ef4040',
         position: 'topRight',
+        icon: 'fa-solid fa-xmark',
+        iconColor: 'rgb(0, 0, 0)',
       });
       startButton.classList.remove('data-button-active');
       startButton.disabled = true;
