@@ -43,6 +43,7 @@ form.addEventListener('submit', event => {
         icon: 'bi bi-x-octagon',
         iconColor: '#fff',
       }),
-    )
-    .finally(() => form.reset());
+    );
+
+  form.reset();
 });
