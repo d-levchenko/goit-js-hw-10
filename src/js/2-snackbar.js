@@ -1,31 +1,48 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-// `✅ Fulfilled promise in ${delay}ms`;
-// `❌ Rejected promise in ${delay}ms`
+const form = document.querySelector('.form');
 
-const valueDelay = document.querySelector('.form-delay-input');
-
-const makePromise = ({ value, valueDelay, shouldResolve = true }) => {
+const makePromise = ({ delay, shouldResolve }) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(value);
+        resolve(delay);
       } else {
-        reject(value);
+        reject(delay);
       }
-    }, valueDelay);
+    }, delay);
   });
 };
 
-makePromise({ value, delay: valueDelay }).then(value =>
-  iziToast.show({
-    message: `✅ Fulfilled promise in ${delay}ms`,
-    messageColor: '#fff',
-    backgroundColor: '#59a10d',
-    title: 'OK',
-    position: 'topRight',
-    icon: 'fa-solid fa-check',
-    iconColor: 'rgb(0, 0, 0)',
-  }),
-);
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const shouldResolve =
+    document.querySelector('input[name="state"]:checked').value === 'fulfilled';
+  const valueDelay = Number(document.querySelector('.form-delay-input').value);
+
+  makePromise({ delay: valueDelay, shouldResolve })
+    .then(() =>
+      iziToast.show({
+        message: `Fulfilled promise in ${valueDelay}ms`,
+        messageColor: '#fff',
+        backgroundColor: '#59a10d',
+        position: 'topRight',
+
+        icon: 'bi bi-check2-circle',
+        iconColor: '#fff',
+      }),
+    )
+    .catch(() =>
+      iziToast.show({
+        message: `Rejected promise in ${valueDelay}ms`,
+        messageColor: '#fff',
+        backgroundColor: '#ef4040',
+        position: 'topRight',
+
+        icon: 'bi bi-x-octagon',
+        iconColor: '#fff',
+      }),
+    )
+    .finally(() => form.reset());
+});
