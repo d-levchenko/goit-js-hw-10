@@ -16,7 +16,7 @@ const options = {
     userSelectedDate = selectedDates[0];
     console.log(selectedDates[0]);
 
-    if (userSelectedDate < Date.now()) {
+    if (userSelectedDate <= Date.now()) {
       iziToast.show({
         message: 'Please choose a date in the future',
         messageColor: '#fff',
@@ -70,8 +70,6 @@ startButton.addEventListener('click', () => {
 
     if (difference <= 0) {
       clearInterval(startCount);
-      startButton.classList.add('data-button-active');
-      startButton.disabled = false;
       inputField.disabled = false;
       return;
     }
