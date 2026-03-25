@@ -2,7 +2,6 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
 const form = document.querySelector('.form');
-const delay = Number(document.querySelector('.form-delay-input').value);
 
 const makePromise = ({ delay, shouldResolve }) => {
   return new Promise((resolve, reject) => {
@@ -18,11 +17,13 @@ const makePromise = ({ delay, shouldResolve }) => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+
   const shouldResolve =
     document.querySelector('input[name="state"]:checked').value === 'fulfilled';
+  const delay = Number(form.elements.delay.value);
 
   makePromise({ delay, shouldResolve })
-    .then(() =>
+    .then(delay =>
       iziToast.show({
         message: `Fulfilled promise in ${delay}ms`,
         messageColor: '#fff',
@@ -33,7 +34,7 @@ form.addEventListener('submit', event => {
         iconColor: '#fff',
       }),
     )
-    .catch(() =>
+    .catch(delay =>
       iziToast.show({
         message: `Rejected promise in ${delay}ms`,
         messageColor: '#fff',
